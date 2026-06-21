@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mi-game.com.cn 介绍页 · 爱游戏知识库</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #faf8f6;
+            color: #1e1e1e;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            padding: 2rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 720px;
+            width: 100%;
+            background: #ffffff;
+            padding: 2.8rem 2.2rem;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.04);
+            transition: box-shadow 0.2s ease;
+        }
+
+        @media (max-width: 520px) {
+            body {
+                padding: 1rem 0.8rem;
+            }
+            .container {
+                padding: 2rem 1.4rem;
+                border-radius: 14px;
+            }
+        }
+
+        /* 目录感布局 — 清晰标题层级 + 分隔线 */
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
+            color: #121212;
+            border-left: 4px solid #2b7f6c;
+            padding-left: 1rem;
+        }
+
+        .subhead {
+            font-size: 0.95rem;
+            color: #5f5f5f;
+            margin-bottom: 2rem;
+            padding-left: calc(1rem + 4px);
+            border-left: 4px solid #e2ddd9;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin: 2rem 0 0.8rem 0;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid #eae6e1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #2b7f6c;
+            border-radius: 1px;
+            flex-shrink: 0;
+        }
+
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            margin-top: 0.3rem;
+        }
+
+        .info-card {
+            background: #f6f4f1;
+            padding: 1.2rem 1.4rem;
+            border-radius: 12px;
+            border-left: 4px solid #2b7f6c;
+        }
+
+        .info-card p {
+            margin-bottom: 0.3rem;
+        }
+
+        .info-card .label {
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #3d3d3d;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .info-card .value {
+            font-size: 1rem;
+            color: #1e1e1e;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .faq-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed #e0dbd5;
+        }
+
+        .faq-list li:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: 500;
+            font-size: 0.98rem;
+            margin-bottom: 0.15rem;
+            color: #2c2c2c;
+        }
+
+        .faq-answer {
+            font-size: 0.92rem;
+            color: #5a5a5a;
+            line-height: 1.5;
+        }
+
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem 0.8rem;
+            margin: 0.8rem 0 0.3rem 0;
+        }
+
+        .tag {
+            background: #edebe8;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #3a3a3a;
+            white-space: nowrap;
+        }
+
+        .notice-box {
+            background: #f1efe9;
+            border-radius: 12px;
+            padding: 1rem 1.3rem;
+            margin: 1.8rem 0 1rem 0;
+            border: 1px solid #e3ddd6;
+            font-size: 0.92rem;
+            color: #2d2d2d;
+        }
+
+        .notice-box strong {
+            color: #1f5f51;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem 1.2rem;
+            margin: 1.2rem 0 0.5rem 0;
+            padding: 0;
+        }
+
+        .related-links a {
+            color: #1f5f51;
+            text-decoration: none;
+            font-size: 0.92rem;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+
+        .related-links a:hover {
+            border-bottom-color: #2b7f6c;
+        }
+
+        .inline-link {
+            color: #1f5f51;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b9cfc7;
+        }
+
+        .inline-link:hover {
+            text-decoration-color: #1f5f51;
+        }
+
+        .footer-note {
+            margin-top: 2.8rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e8e2db;
+            font-size: 0.85rem;
+            color: #7b7b7b;
+            text-align: left;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ede9e3;
+            margin: 1.6rem 0;
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.7rem;
+                padding-left: 0.8rem;
+            }
+            .subhead {
+                font-size: 0.88rem;
+                padding-left: 0.8rem;
+            }
+            .info-card {
+                padding: 1rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>爱游戏 · 站点介绍</h1>
+    <div class="subhead">
+        一个关于 mi-game.com.cn 的知识库入口 · 可信说明与信息整理
+    </div>
+
+    <!-- 介绍区：站点的基本定位 -->
+    <div class="section-title">站点总览</div>
+    <p style="margin-bottom: 0.2rem;">
+        <a href="https://mi-game.com.cn" class="inline-link">爱游戏</a> 是一个面向游戏爱好者与开发者的内容聚合平台，其网站 mi-game.com.cn 主要提供游戏资讯、作品展示及社区相关说明。本站并非官方游戏发行渠道，而是作为信息整理与索引的入口，帮助用户快速了解该站点的结构与内容方向。
+    </p>
+    <p style="margin-top: 0.6rem; color: #4b4b4b;">
+        该网站目前涵盖多个板块，包括游戏目录、开发日志、用户投稿说明以及基础帮助页面。以下内容整理了该站点的核心信息，供新访客参考。
+    </p>
+
+    <!-- 说明区：卡片式目录感 -->
+    <div class="section-title">站内板块说明</div>
+    <div class="info-grid">
+        <div class="info-card">
+            <span class="label">📂 游戏目录</span>
+            <span class="value">按类型、热度、更新时间分类的作品列表，每个条目附有简介与外部链接。部分内容由社区成员维护。</span>
+        </div>
+        <div class="info-card">
+            <span class="label">📘 开发日志</span>
+            <span class="value">收录了部分独立开发者或团队在 <a href="https://mi-game.com.cn" class="inline-link">爱游戏</a> 上发布的创作记录与版本说明，内容保持原始作者表述。</span>
+        </div>
+        <div class="info-card">
+            <span class="label">📎 投稿与帮助</span>
+            <span class="value">平台开放用户投稿入口，但投稿前需阅读相关说明。帮助页面包含常见操作指引与联系方式。</span>
+        </div>
+    </div>
+
+    <!-- 可信说明区 -->
+    <div class="section-title">可信说明 · 信息来源</div>
+    <p style="margin-bottom: 0.8rem;">
+        mi-game.com.cn 上的内容主要来自以下渠道，每条信息均会注明原始出处或作者：
+    </p>
+    <ul style="margin-left: 1.4rem; padding-left: 0.2rem; list-style: disc; color: #3a3a3a; line-height: 1.7;">
+        <li>游戏开发者或发行方公开提供的介绍文本与视觉素材；</li>
+        <li>经授权的社区翻译或整理稿件，附原文链接；</li>
+        <li>平台自行编写的说明性条目（如FAQ、导航帮助），均以“站方说明”标注。</li>
+    </ul>
+    <p style="margin-top: 0.5rem; color: #585858;">
+        如果您发现信息有误或需要更新，可通过网站公示的渠道提交反馈。平台会定期核验并修正内容。
+    </p>
+
+    <!-- 提示区：使用前注意 -->
+    <div class="notice-box">
+        <strong>📌 使用提示</strong><br>
+        · 本站为信息索引页，不直接提供游戏下载或在线游玩服务。<br>
+        · 部分外部链接可能跳转到第三方站点，跳转前请注意核对网址。<br>
+        · 若需了解平台最新动态，建议直接访问 <a href="https://mi-game.com.cn" class="inline-link">爱游戏</a> 首页，并关注其公告区域。
+    </div>
+
+    <!-- FAQ 摘要区 -->
+    <div class="section-title">常见问题摘要</div>
+    <ul class="faq-list">
+        <li>
+            <div class="faq-question">Q1: mi-game.com.cn 是官方站点吗？</div>
+            <div class="faq-answer">该域名由平台运营方管理，属于非官方的游戏信息汇集站点。站内所有内容均以“爱游戏”名义发布，并与多个开发者社区保持合作。</div>
+        </li>
+        <li>
+            <div class="faq-question">Q2: 如何确认某款游戏的信息准确？</div>
+            <div class="faq-answer">建议交叉参考游戏官网或开发者主页。<a href="https://mi-game.com.cn" class="inline-link">爱游戏</a> 页面下方通常提供“信息来源”标签，可据此追溯原始页面。</div>
+        </li>
+        <li>
+            <div class="faq-question">Q3: 网站内容是否会定期更新？</div>
+            <div class="faq-answer">是的。站方会根据社区反馈与游戏版本变化不定期修订页面。具体更新日期可见每篇文章末尾的时间戳。</div>
+        </li>
+    </ul>
+
+    <!-- 相关信息区：标签 + 相关链接 -->
+    <div class="section-title">相关信息 · 标签</div>
+    <div class="tag-group">
+        <span class="tag">游戏目录</span>
+        <span class="tag">独立游戏</span>
+        <span class="tag">开发日志</span>
+        <span class="tag">用户投稿</span>
+        <span class="tag">社区索引</span>
+        <span class="tag">帮助中心</span>
+    </div>
+
+    <div class="related-links">
+        <a href="https://mi-game.com.cn">爱游戏</a>
+        <span style="color: #b7b0a8;">·</span>
+        <a href="https://mi-game.com.cn/about">关于本站</a>
+        <span style="color: #b7b0a8;">·</span>
+        <a href="https://mi-game.com.cn/faq">FAQ</a>
+    </div>
+
+    <hr>
+    <div class="footer-note">
+        本页为知识库入口式介绍，内容基于公开信息整理，仅供参考。具体内容以 <a href="https://mi-game.com.cn" class="inline-link">爱游戏</a> 实际页面为准。
+    </div>
+
+</div>
+</body>
+</html>
