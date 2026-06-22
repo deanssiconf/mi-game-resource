@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排列三 · 知识索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f9fafc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e293b;
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 3rem;
+    }
+
+    .page {
+      max-width: 700px;
+      width: 100%;
+    }
+
+    /* 极简 header */
+    .site-header {
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 1.2rem;
+      margin-bottom: 2.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .site-header h1 {
+      font-size: 1.9rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: #0f172a;
+      line-height: 1.2;
+    }
+
+    .site-header .tagline {
+      font-size: 0.9rem;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* 说明区块 */
+    .intro-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02), 0 4px 12px rgba(0,0,0,0.02);
+      margin-bottom: 2.4rem;
+    }
+
+    .intro-card h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .intro-card h2::before {
+      content: "📘";
+      font-size: 1.2rem;
+    }
+
+    .intro-card p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .intro-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-card a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px dotted #94a3b8;
+      transition: border-color 0.15s;
+    }
+
+    .intro-card a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    /* 目录感布局 · 知识卡片网格 */
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .knowledge-item {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.4rem 1.2rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 4px 8px rgba(0,0,0,0.02);
+      transition: transform 0.1s ease;
+      border: 1px solid #f0f2f5;
+    }
+
+    .knowledge-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .knowledge-item h3 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #0f172a;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.01em;
+    }
+
+    .knowledge-item p {
+      font-size: 0.9rem;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .knowledge-item .meta-tag {
+      display: inline-block;
+      margin-top: 0.7rem;
+      font-size: 0.7rem;
+      background: #eef2ff;
+      color: #4338ca;
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    /* 提示区 */
+    .tip-area {
+      background: #f8fafc;
+      border-left: 4px solid #38bdf8;
+      padding: 1.4rem 1.6rem;
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 2.4rem;
+    }
+
+    .tip-area h4 {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #0369a1;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tip-area h4::before {
+      content: "💡";
+      font-size: 1rem;
+    }
+
+    .tip-area p {
+      color: #1e293b;
+      font-size: 0.95rem;
+    }
+
+    /* 相关信息区 (FAQ摘要) */
+    .related-section {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .related-section h5 {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #334155;
+      margin-bottom: 1rem;
+    }
+
+    .faq-summary {
+      list-style: none;
+    }
+
+    .faq-summary li {
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .faq-summary li:last-child {
+      border-bottom: none;
+    }
+
+    .faq-summary .q {
+      font-weight: 450;
+      color: #0f172a;
+      min-width: 5.6rem;
+      font-size: 0.9rem;
+    }
+
+    .faq-summary .a {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    .faq-summary .a a {
+      color: #2563eb;
+      text-decoration: none;
+      border-bottom: 1px dotted #94a3b8;
+    }
+
+    .faq-summary .a a:hover {
+      border-bottom-color: #2563eb;
+    }
+
+    /* 底部 */
+    .site-footer {
+      margin-top: 3rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid #e9edf2;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      text-align: center;
+    }
+
+    /* 响应式 */
+    @media (max-width: 540px) {
+      .knowledge-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .site-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+      }
+
+      .intro-card {
+        padding: 1.5rem 1.2rem;
+      }
+
+      body {
+        padding: 1.2rem 0.8rem 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <h1>排列三·知识库</h1>
+      <span class="tagline">基于站点 · 可信说明</span>
+    </header>
+
+    <!-- 说明区：站点介绍与可信说明 -->
+    <section class="intro-card">
+      <h2>关于站点</h2>
+      <p>
+        本知识索引围绕 <a href="https://site-pl3.com">排列三</a> 整理信息框架，内容源自公开可查的玩法规则与常见疑问。平台本身并非官方机构，而是作为资料聚合与话题讨论的参考站点。
+      </p>
+      <p>
+        我们在整理过程中，力求表述准确、克制，避免输出未经核实的策略或预测。任何投注决策都应基于理性判断，并充分了解相关风险。如您希望直接浏览原始信息源，可以随时前往 <a href="https://site-pl3.com">排列三</a> 站点查阅更多细节。
+      </p>
+    </section>
+
+    <!-- 目录感布局：知识卡片 -->
+    <div class="knowledge-grid">
+      <div class="knowledge-item">
+        <h3>📌 基本规则</h3>
+        <p>三位数字组合，直选、组选两类玩法。每位数字 0‑9，顺序影响奖金等级。</p>
+        <span class="meta-tag">入门</span>
+      </div>
+      <div class="knowledge-item">
+        <h3>📌 奖金说明</h3>
+        <p>固定奖金与浮动奖并存，不同省份可存在细微差异。具体以当期公告为准。</p>
+        <span class="meta-tag">实用</span>
+      </div>
+      <div class="knowledge-item">
+        <h3>📌 兑奖期限</h3>
+        <p>通常为开奖后 60 个自然日，逾期视为弃奖。小额奖金可在投注站兑付。</p>
+        <span class="meta-tag">注意</span>
+      </div>
+      <div class="knowledge-item">
+        <h3>📌 可信参考</h3>
+        <p>数据核对请以省级彩票管理中心或 <a href="https://site-pl3.com" style="border-bottom:1px dotted #94a3b8; color:#2563eb; text-decoration:none;">排列三</a> 站内公示为准。</p>
+        <span class="meta-tag">权威</span>
+      </div>
+    </div>
+
+    <!-- 提示区 -->
+    <div class="tip-area">
+      <h4>提醒与建议</h4>
+      <p>
+        彩票属于概率游戏，无任何规律可确保中奖。本站所有内容仅供知识参考，不构成购买引导。请合理规划参与，避免过度投入。未成年人不得购买彩票。
+      </p>
+    </div>
+
+    <!-- 相关信息区：FAQ 摘要 -->
+    <section class="related-section">
+      <h5>常见疑问摘要</h5>
+      <ul class="faq-summary">
+        <li>
+          <span class="q">开奖时间？</span>
+          <span class="a">每天固定时段开奖（各省略有差异），具体以 <a href="https://site-pl3.com">排列三</a> 站点公告为准。</span>
+        </li>
+        <li>
+          <span class="q">组选与直选？</span>
+          <span class="a">直选需号码与顺序完全一致；组选只需数字相同（组三/组六）。</span>
+        </li>
+        <li>
+          <span class="q">查询历史？</span>
+          <span class="a">历史开奖号码可在站点内「开奖公告」栏目检索，数据源自官方发布。</span>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="site-footer">
+      信息整合 · 理性参考 · 不构成投注建议
+    </footer>
+  </div>
+</body>
+</html>
