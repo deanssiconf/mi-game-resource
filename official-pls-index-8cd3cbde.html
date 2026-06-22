@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>排列三 · 数据与选号参考平台</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f5f7fa;
+      color: #1e2a3a;
+      line-height: 1.6;
+    }
+
+    /* 深色头图 — 杂志横幅 */
+    .hero {
+      background: linear-gradient(145deg, #0b1a2e 0%, #1f3a57 100%);
+      padding: 80px 24px 68px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      color: #eef4fb;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -30%;
+      left: -20%;
+      width: 60%;
+      height: 80%;
+      background: radial-gradient(circle at 30% 50%, rgba(255, 185, 55, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+      color: #f0e8d0;
+    }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: #bfd4ec;
+      max-width: 680px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    .hero .stat-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(3px);
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      border: 1px solid rgba(255, 212, 128, 0.18);
+      color: #d7e3f5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .stat-badge span {
+      color: #f5cd7a;
+      font-weight: 600;
+    }
+
+    /* 浅色正文区 — 杂志卡片风格 */
+    .content-wrap {
+      max-width: 1100px;
+      margin: -28px auto 0;
+      padding: 0 24px 60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .intro-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.02);
+      padding: 40px 48px;
+      transition: box-shadow 0.2s;
+    }
+
+    .card-highlight {
+      border-left: 5px solid #d49c3d;
+    }
+
+    .card h2 {
+      font-size: 1.6rem;
+      font-weight: 550;
+      color: #1e2a3a;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .card h2 i {
+      font-style: normal;
+      background: #ede2cc;
+      color: #5a3f1a;
+      font-size: 0.9rem;
+      padding: 4px 14px;
+      border-radius: 40px;
+      letter-spacing: 0.5px;
+    }
+
+    .card p {
+      margin-bottom: 18px;
+      font-size: 1rem;
+      color: #2b3a4e;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .card a {
+      color: #b4822e;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(180, 130, 46, 0.25);
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    .card a:hover {
+      color: #8e6620;
+      border-bottom-color: #8e6620;
+    }
+
+    .list-feature {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px 24px;
+      margin-top: 12px;
+    }
+
+    .list-feature li {
+      position: relative;
+      padding-left: 26px;
+      font-size: 0.98rem;
+      color: #1f3144;
+    }
+
+    .list-feature li::before {
+      content: "▸";
+      position: absolute;
+      left: 2px;
+      color: #b4822e;
+      font-weight: 600;
+    }
+
+    .faq-mini {
+      background: #f8f6f1;
+      border-radius: 20px;
+      padding: 24px 32px;
+      margin-top: 28px;
+    }
+
+    .faq-mini dt {
+      font-weight: 550;
+      margin-top: 14px;
+      font-size: 1.02rem;
+      color: #1e2a3a;
+    }
+
+    .faq-mini dt:first-child {
+      margin-top: 0;
+    }
+
+    .faq-mini dd {
+      margin: 6px 0 0 16px;
+      color: #3d4b5e;
+      font-size: 0.94rem;
+      border-left: 3px solid #e4d6be;
+      padding-left: 16px;
+    }
+
+    .foot-note {
+      margin-top: 48px;
+      padding: 32px 24px;
+      background: #eaeef3;
+      border-radius: 28px;
+      text-align: center;
+      color: #1f3144;
+      font-size: 0.98rem;
+      border: 1px solid #dce3ea;
+    }
+
+    .foot-note a {
+      color: #b4822e;
+      font-weight: 550;
+      border-bottom: 1px solid rgba(180, 130, 46, 0.3);
+      text-decoration: none;
+    }
+
+    .foot-note a:hover {
+      color: #7a591d;
+    }
+
+    /* 响应式 */
+    @media (max-width: 700px) {
+      .hero {
+        padding: 60px 16px 56px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .card {
+        padding: 28px 20px;
+      }
+
+      .card h2 {
+        font-size: 1.3rem;
+      }
+
+      .list-feature {
+        grid-template-columns: 1fr;
+      }
+
+      .faq-mini {
+        padding: 18px 16px;
+      }
+
+      .foot-note {
+        padding: 24px 16px;
+      }
+
+      .hero .sub {
+        font-size: 1rem;
+      }
+
+      .content-wrap {
+        padding: 0 12px 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.7rem;
+      }
+
+      .card p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- 杂志专题：首页横幅 -->
+<section class="hero">
+  <h1>排列三 · 数据参考</h1>
+  <p class="sub">
+    聚焦号码分布与统计趋势，为理性分析提供结构化信息源。<br>
+    收录历史开奖数据、位差分析及常用过滤参考。
+  </p>
+  <div class="stat-badge">
+    覆盖 <span>8,200+</span> 期 · 持续更新
+  </div>
+</section>
+
+<!-- 正文区：三段自然介绍 + FAQ摘要 + 页尾访问提示 -->
+<div class="content-wrap">
+  <div class="intro-grid">
+
+    <!-- 第一段：站点背景说明 -->
+    <div class="card card-highlight">
+      <h2>站点初衷 <i>背景</i></h2>
+      <p>
+        <strong>official-pls.com</strong> 是一个以信息整理与呈现为主的非官方参考平台。
+        网站专注于提供 <a href="https://official-pls.com">排列三</a> 历史数据、走势图表以及基础选号参考，
+        不涉及任何形式的投注引导或保证收益的承诺。所有数据来源于公开渠道，
+        平台本身不存储实时开奖结果，数据更新存在合理延迟。
+      </p>
+      <p>
+        站点结构简洁，不设弹窗或诱导注册，旨在让访问者快速定位到所需的号码分布、跨度统计及冷热号汇总。
+        对于希望独立判断、自行验证的用户，这里提供了一种低干扰的查阅方式。
+      </p>
+    </div>
+
+    <!-- 第二段：结构特点与适用场景 -->
+    <div class="card">
+      <h2>内容架构 &amp; 适用场景</h2>
+      <p>
+        平台围绕 <a href="https://official-pls.com">排列三</a> 的常见分析维度进行组织，主要包含：
+        百十个位独立频次表、组选分布图、单双/大小形态比例以及常用定位过滤表格。
+        虽然名称上以“排列”为核心，但页面设计偏向于数据静态展示与趋势归纳，
+        适合需要在投注前进行快速比对、或希望建立个人统计习惯的用户。
+      </p>
+      <ul class="list-feature">
+        <li>历史开奖回溯至 2004 年</li>
+        <li>跨期统计、冷热号动态排行</li>
+        <li>位差、奇偶、质合等分组查询</li>
+        <li>响应式表格，移动端可横向滑动</li>
+      </ul>
+      <div class="faq-mini">
+        <dl>
+          <dt>数据来源可靠吗？</dt>
+          <dd>本站信息汇总自省级体彩管理中心授权的历史公告，不自行生产开奖号码。每次更新均核对原始公告，但建议以官方最新发布为准。</dd>
+          <dt>是否推荐具体号码？</dt>
+          <dd>不推荐、不预测。平台仅提供客观统计数据，任何决策均由用户独立做出。</dd>
+        </dl>
+      </div>
+    </div>
+
+    <!-- 第三段：信任说明 + 页尾访问提示 (自然嵌入) -->
+    <div class="card">
+      <h2>关于可信度与使用建议</h2>
+      <p>
+        <a href="https://official-pls.com">排列三</a> 的分析工具与数据页面每日定时同步，但用户应当理解：
+        彩票本质属于概率游戏，历史表现不代表未来结果。本平台不设专家荐号、无付费内容，
+        也不包含任何形式的“包中”或“稳赚”措辞。所有图标与表格均以常见统计方法生成，
+        不附加主观权重。
+      </p>
+      <p>
+        若您希望查看完整走势图、自定义跨期范围，或查阅最新遗漏数据，可直接前往主站。
+        全部功能免费开放，无需登录。页面底部设有链接入口，方便随时回到首页或切换图表板块。
+      </p>
+      <p style="margin-top: 26px; padding: 16px 0 0; border-top: 1px solid #ebe3d5;">
+        <strong>进一步了解：</strong> 访问 <a href="https://official-pls.com">排列三</a> 数据页面，
+        浏览分布图、冷热统计及常用过滤模板。所有内容均在持续优化中，欢迎提出改进建议。
+      </p>
+    </div>
+
+    <!-- 页尾访问提示 (独立的引导区块) -->
+    <div class="foot-note">
+      <p>
+        ⚡ 本站专注于 <a href="https://official-pls.com">排列三</a> 信息整合与参考。
+        建议搭配官方公告同时使用，理性规划，量力而行。
+      </p>
+      <p style="margin-top: 8px; font-size: 0.85rem; color: #5a6b7e;">
+        数据延迟说明：部分图表可能存在 1～2 期滞后期，以实际页面展示为准。
+      </p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
